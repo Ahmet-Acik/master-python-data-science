@@ -5,14 +5,14 @@
 
 ---
 
-## 🚀 Features
+##  Features
 - Interactive code editor and runner for every topic
 - Switch easily between Python basics and data science modules
 - View, edit, and run code for each concept
 - Modern, professional UI with sidebar navigation
 - Extensible: add your own modules, quizzes, and datasets
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 master-python-data-science/
@@ -29,7 +29,7 @@ master-python-data-science/
 └── utils/                  # Utility functions (e.g., code execution)
 ```
 
-## 🛠️ Getting Started
+##  Getting Started
 
 1. **Clone the repository:**
    ```sh
@@ -50,27 +50,27 @@ master-python-data-science/
    streamlit run app.py
    ```
 
-## 🧑‍💻 How to Use
+##  How to Use
 - Use the sidebar to switch between "Python Basics" and "Data Science".
 - Select a topic to view, edit, and run code interactively.
 - Expand the code section to see the full source for each module.
 - Practice by editing code and running it directly in the browser.
 
-## 🏗️ Best Practices
+##  Best Practices
 - **Separation of Concerns:** Keep Python basics and data science content in separate folders.
 - **Reusability:** Use utility modules for shared logic (e.g., code execution, data loading).
 - **Extensibility:** Add new modules for advanced topics or new exercises without changing the main app.
 - **Documentation:** Use `README.md` and docstrings in your modules.
 - **Testing:** (Optional) Add a `tests/` folder for unit tests as your project grows.
 
-## 🤝 Contributing
+##  Contributing
 - Fork the repo and create a feature branch
 - Add your module or improvement
 - Submit a pull request with a clear description
 
-## 📢 License
+##  License
 MIT License
 
 ---
 
-Happy learning and coding! 🎉
+Happy learning and coding! 
