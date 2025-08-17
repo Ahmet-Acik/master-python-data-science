@@ -6,24 +6,39 @@ import seaborn as sns
 import importlib
 import os
 
-# --- Section selection ---
-st.sidebar.title("Master Python for Data Science")
-section = st.sidebar.radio("Choose Section:", ["Python Basics", "Data Science"])
+import streamlit.components.v1 as components
 
-if section == "Python Basics":
-    st.sidebar.subheader("Topics")
+# --- Section selection ---
+st.markdown(
+    """
+    <style>
+    .main-title {font-size:2.2rem; font-weight:700; color:#4F8BF9; margin-bottom:0.5em;}
+    .section-header {font-size:1.3rem; font-weight:600; color:#22223B; margin-top:1.5em; margin-bottom:0.5em;}
+    .stApp {background-color: #f7f9fa;}
+    .sidebar-title {font-size:1.2rem; font-weight:600; color:#4F8BF9;}
+    .sidebar-section {margin-bottom:1.5em;}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.sidebar.markdown('<div class="sidebar-title"> Python for Data Science</div>', unsafe_allow_html=True)
+section = st.sidebar.radio("", [" Python Basics", " Data Science"], key="section_radio")
+
+if section == " Python Basics":
+    st.sidebar.markdown('<div class="sidebar-section"><b>Topics</b></div>', unsafe_allow_html=True)
     basics_dir = "basics"
     modules = [f[:-3] for f in os.listdir(basics_dir) if f.endswith('.py') and not f.startswith('__')]
     modules.sort()
-    selected = st.sidebar.selectbox("Choose a topic to explore:", modules, key="basics_select")
-    st.title("Python Basics")
-elif section == "Data Science":
-    st.sidebar.subheader("Topics")
+    selected = st.sidebar.selectbox("Select topic:", modules, key="basics_select")
+    st.markdown('<div class="main-title"> Python Basics</div>', unsafe_allow_html=True)
+elif section == " Data Science":
+    st.sidebar.markdown('<div class="sidebar-section"><b>Topics</b></div>', unsafe_allow_html=True)
     ds_dir = "data_science"
     modules = [f[:-3] for f in os.listdir(ds_dir) if f.endswith('.py') and not f.startswith('__')]
     modules.sort()
-    selected = st.sidebar.selectbox("Choose a topic to explore:", modules, key="ds_select")
-    st.title("Data Science")
+    selected = st.sidebar.selectbox("Select topic:", modules, key="ds_select")
+    st.markdown('<div class="main-title"> Data Science</div>', unsafe_allow_html=True)
     basics_dir = ds_dir
 
 st.title("Master Python for Data Science")
@@ -38,18 +53,18 @@ selected = st.sidebar.selectbox("Choose a topic to explore:", modules)
 
 if selected:
     mod = importlib.import_module(f"{basics_dir}.{selected}")
-    st.subheader(f"{basics_dir}/{selected}.py")
+    st.markdown(f'<div class="section-header">{basics_dir}/{selected}.py</div>', unsafe_allow_html=True)
     module_path = os.path.join(basics_dir, f"{selected}.py")
     with open(module_path) as f:
         module_code = f.read()
-    with st.expander("Show module code"):
+    with st.expander("Show module code", expanded=False):
         st.code(module_code, language="python")
 
-    # --- Interactive code editor ---
-    st.markdown("**Practice this topic:**")
+    st.markdown('<div class="section-header">Practice this topic:</div>', unsafe_allow_html=True)
     default_code = module_code
     user_code = st.text_area("Edit and run code below:", value=default_code, height=250, key=f"editor_{basics_dir}_{selected}")
-    if st.button(f"Run Your Code for {selected}"):
+    run_btn = st.button(f"▶️ Run Your Code for {selected}")
+    if run_btn:
         import io, contextlib
         output = io.StringIO()
         result = None
@@ -72,7 +87,7 @@ from contextlib import contextmanager
                 exec_namespace = {}
                 exec(code_to_run, exec_namespace, exec_namespace)
             std_output = output.getvalue()
-            st.markdown("**Standard Output:**")
+            st.markdown("<b>Standard Output:</b>", unsafe_allow_html=True)
             if std_output.strip():
                 st.code(std_output)
             else:
@@ -82,11 +97,11 @@ from contextlib import contextmanager
             user_funcs = [k for k, v in exec_namespace.items() if callable(v) and isinstance(v, types.FunctionType) and v.__module__ == '__main__']
             if 'main' in user_funcs:
                 ret = exec_namespace['main']()
-                st.markdown("**main() Return Value:**")
+                st.markdown("<b>main() Return Value:</b>", unsafe_allow_html=True)
                 st.success(ret)
             elif user_funcs:
                 ret = exec_namespace[user_funcs[0]]()
-                st.markdown(f"**{user_funcs[0]}() Return Value:**")
+                st.markdown(f"<b>{user_funcs[0]}() Return Value:</b>", unsafe_allow_html=True)
                 st.success(ret)
         except Exception as e:
             st.error(f"Error: {e}")
