@@ -51,10 +51,10 @@ st.markdown(
 
 # --- Sidebar ---
 with st.sidebar:
-    st.markdown('<div class="sidebar-title">🧑‍💻 Python for Data Science</div>', unsafe_allow_html=True)
-    section = st.radio("", ["🐍 Python Basics", "📊 Data Science"], key="section_radio")
+    st.markdown('<div class="sidebar-title"> Python for Data Science</div>', unsafe_allow_html=True)
+    section = st.radio("", [" Python Basics", " Data Science"], key="section_radio")
     st.markdown('<div class="sidebar-section"><b>Topics</b></div>', unsafe_allow_html=True)
-    if section == "🐍 Python Basics":
+    if section == " Python Basics":
         basics_dir = "basics"
         modules = [f[:-3] for f in os.listdir(basics_dir) if f.endswith('.py') and not f.startswith('__')]
         modules.sort()
