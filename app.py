@@ -6,6 +6,26 @@ import seaborn as sns
 import importlib
 import os
 
+# --- Section selection ---
+st.sidebar.title("Master Python for Data Science")
+section = st.sidebar.radio("Choose Section:", ["Python Basics", "Data Science"])
+
+if section == "Python Basics":
+    st.sidebar.subheader("Topics")
+    basics_dir = "basics"
+    modules = [f[:-3] for f in os.listdir(basics_dir) if f.endswith('.py') and not f.startswith('__')]
+    modules.sort()
+    selected = st.sidebar.selectbox("Choose a topic to explore:", modules, key="basics_select")
+    st.title("Python Basics")
+elif section == "Data Science":
+    st.sidebar.subheader("Topics")
+    ds_dir = "data_science"
+    modules = [f[:-3] for f in os.listdir(ds_dir) if f.endswith('.py') and not f.startswith('__')]
+    modules.sort()
+    selected = st.sidebar.selectbox("Choose a topic to explore:", modules, key="ds_select")
+    st.title("Data Science")
+    basics_dir = ds_dir
+
 st.title("Master Python for Data Science")
 st.write("Welcome! Practice Python and data science interactively.")
 
@@ -17,8 +37,8 @@ modules.sort()
 selected = st.sidebar.selectbox("Choose a topic to explore:", modules)
 
 if selected:
-    mod = importlib.import_module(f"basics.{selected}")
-    st.subheader(f"basics/{selected}.py")
+    mod = importlib.import_module(f"{basics_dir}.{selected}")
+    st.subheader(f"{basics_dir}/{selected}.py")
     module_path = os.path.join(basics_dir, f"{selected}.py")
     with open(module_path) as f:
         module_code = f.read()
@@ -28,12 +48,12 @@ if selected:
     # --- Interactive code editor ---
     st.markdown("**Practice this topic:**")
     default_code = module_code
-    user_code = st.text_area("Edit and run code below:", value=default_code, height=250, key=f"editor_{selected}")
+    user_code = st.text_area("Edit and run code below:", value=default_code, height=250, key=f"editor_{basics_dir}_{selected}")
     if st.button(f"Run Your Code for {selected}"):
         import io, contextlib
         output = io.StringIO()
         result = None
-        # Common imports for all basics modules
+        # Common imports for all modules
         common_imports = """
 import sys
 import os
