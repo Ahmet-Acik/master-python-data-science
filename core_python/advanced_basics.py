@@ -1,8 +1,10 @@
 """
 advanced_basics.py
------------------
+------------------
 Advanced core Python topics for data science and robust scripting.
 Includes: advanced built-ins, slicing, copying, mutability, advanced error handling, advanced file I/O, iterators, unpacking, comprehensions, modules, type hints, context managers, regex, datetime, argparse, and more.
+
+All examples use type hints, docstrings, and real-world comments. See the __main__ block for practical usage.
 """
 
 # =========================
@@ -76,7 +78,14 @@ def write_json():
     data = {'a': 1, 'b': 2}
     with open('data.json', 'w') as f:
         json.dump(data, f)
-
+        def add_or_concat(a: Union[int, str], b: Union[int, str]) -> Union[int, str]:
+            """Add if both are int, concatenate if both are str, else raise TypeError."""
+            if isinstance(a, int) and isinstance(b, int):
+                return a + b
+            elif isinstance(a, str) and isinstance(b, str):
+                return a + b
+            else:
+                raise TypeError("Arguments must be both int or both str.")
 def read_json():
     with open('data.json') as f:
         return json.load(f)
