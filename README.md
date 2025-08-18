@@ -1,5 +1,6 @@
 
 
+
 # Master Python for Data Science
 
 **A modular, interactive platform to master Python and data science skills, built with Streamlit.**
@@ -89,3 +90,4 @@ MIT License
 ---
 
 Happy learning and coding!
+
