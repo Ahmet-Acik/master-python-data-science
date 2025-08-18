@@ -1,10 +1,41 @@
 """
 basics.py
 ---------
-Comprehensive core Python: variables, data types, control flow, functions, comprehensions, lambda/functional tools, exception handling, file I/O, modules, decorators/generators, type annotations, context managers, regex, datetime, argparse. (OOP is in a separate file.)
+Comprehensive, real-world introduction to core Python for data science, scripting, and professional development.
+- Variables, data types, control flow, functions, comprehensions, functional programming, exception handling, file I/O, modules, decorators/generators, type annotations, context managers, regex, datetime, argparse, and more. (OOP is in a separate file.)
+- Beginners to intermediate Python users, especially those preparing for data science, analytics, or automation roles.
+- Best practices, type hints, practical comments, and real-world/data science examples.
+- Each section is clearly explained and grouped for quick reference.
+- Example usage at the end demonstrates real scenarios.
+basics.py
+Comprehensive, real-world introduction to core Python for data science, scripting, and professional development.
 
-This module follows best practices, uses real-world and data science examples, and is designed for clarity and practical learning.
+Scope:
+	- Variables, data types, control flow, functions, comprehensions, functional programming, exception handling, file I/O, modules, decorators/generators, type annotations, context managers, regex, datetime, argparse, and more. (OOP is in a separate file.)
+
+Audience:
+	- Beginners to intermediate Python users, especially those preparing for data science, analytics, or automation roles.
+
+Features:
+	- Best practices, type hints, practical comments, and real-world/data science examples.
+	- Each section is clearly explained and grouped for quick reference.
+	- Example usage at the end demonstrates real scenarios.
 """
+"""
+
+**Features:**
+- Best practices, type hints, practical comments, and real-world/data science examples.
+- Each section is clearly explained and grouped for quick reference.
+- Example usage at the end demonstrates real scenarios.
+"""
+
+
+"""- Each section is clearly explained and grouped for quick reference.
+- Example usage at the end demonstrates real scenarios.
+"""
+
+# Type hints for advanced return types
+from typing import Generator, Callable
 
 # =========================
 # VARIABLES & ASSIGNMENT
@@ -85,7 +116,11 @@ for t, day in zip(temperatures, ["Mon", "Tue", "Wed", "Thu", "Fri"]):
 	pass  # t is temperature, day is day name
 
 # While loop example
-def find_below_threshold(temps, threshold):
+def find_below_threshold(temps: list[float], threshold: float) -> float | None:
+	"""
+Return the first temperature below the threshold.
+Useful for early stopping in data scans.
+	"""
 	i = 0
 	while i < len(temps):
 		if temps[i] < threshold:
@@ -159,7 +194,11 @@ pairs = list(zip(nums, squares))
 # =========================
 # EXCEPTION HANDLING
 # =========================
-def safe_divide(a, b):
+def safe_divide(a: float, b: float) -> float | str:
+	"""
+Divide a by b, handling division by zero.
+Returns a string if division by zero occurs.
+	"""
 	try:
 		return a / b
 	except ZeroDivisionError:
@@ -168,12 +207,17 @@ def safe_divide(a, b):
 		pass
 
 class CustomError(Exception):
+	"""Custom exception for demonstration purposes."""
 	pass
 
 # =========================
 # FILE I/O
 # =========================
-def write_and_read_file():
+def write_and_read_file() -> str:
+	"""
+Write a string to a file and read it back.
+Demonstrates basic file I/O for logs, configs, etc.
+	"""
 	with open('sample.txt', 'w') as f:
 		f.write('Hello, file!')
 	with open('sample.txt', 'r') as f:
@@ -191,6 +235,10 @@ sqrt_16 = sqrt(16)
 # DECORATORS & GENERATORS
 # =========================
 def simple_decorator(func):
+	"""
+Print messages before and after calling the decorated function.
+Use for logging, timing, etc.
+	"""
 	def wrapper(*args, **kwargs):
 		print('Before call')
 		result = func(*args, **kwargs)
@@ -199,10 +247,14 @@ def simple_decorator(func):
 	return wrapper
 
 @simple_decorator
-def decorated_greet(name):
+def decorated_greet(name: str) -> str:
+	"""Return a decorated greeting string."""
 	return f"Hi, {name}!"
 
-def generator_example():
+def generator_example() -> Generator[int, None, None]:
+	"""
+Yield numbers 0, 1, 2. Use for streaming data, pipelines, etc.
+	"""
 	for i in range(3):
 		yield i
 
@@ -210,6 +262,7 @@ def generator_example():
 # TYPE ANNOTATIONS
 # =========================
 def add_typed(a: int, b: int) -> int:
+	"""Add two integers with type hints."""
 	return a + b
 x_typed: float = 3.14
 y_typed: str = 'hello'
@@ -220,6 +273,10 @@ y_typed: str = 'hello'
 from contextlib import contextmanager
 @contextmanager
 def custom_context():
+	"""
+Example context manager for resource management.
+Use for DB connections, files, etc.
+	"""
 	print('Enter')
 	yield 'inside'
 	print('Exit')
@@ -228,7 +285,11 @@ def custom_context():
 # REGULAR EXPRESSIONS
 # =========================
 import re
-def regex_examples():
+def regex_examples() -> tuple[list[str], list[str], str]:
+	"""
+Find numbers and words in a string, and replace numbers with 'YEAR'.
+Useful for data cleaning and extraction.
+	"""
 	text = 'Data science 2025!'
 	numbers = re.findall(r'\d+', text)
 	words = re.findall(r'\w+', text)
@@ -239,7 +300,11 @@ def regex_examples():
 # DATETIME
 # =========================
 from datetime import datetime, timedelta
-def datetime_examples():
+def datetime_examples() -> tuple[datetime, datetime, str]:
+	"""
+Return current datetime, a week later, and formatted string.
+Useful for time series, scheduling, etc.
+	"""
 	now = datetime.now()
 	future = now + timedelta(days=7)
 	formatted = now.strftime('%Y-%m-%d')
@@ -249,7 +314,11 @@ def datetime_examples():
 # ARGPARSE
 # =========================
 import argparse
-def argparse_example():
+def argparse_example() -> int:
+	"""
+Parse a command-line argument (demo only).
+Use for building CLI tools and scripts.
+	"""
 	parser = argparse.ArgumentParser(description='Example')
 	parser.add_argument('--x', type=int, default=1)
 	args = parser.parse_args([])  # Empty list for demo
@@ -281,7 +350,11 @@ unique_numbers = {1, 2, 3, 2}
 nothing = None
 
 # Type checking
-def type_examples():
+def type_examples() -> tuple[type, ...]:
+	"""
+Return types of various example variables.
+Useful for introspection and debugging.
+	"""
 	str_var = "example"
 	return type(integer), type(floating), type(str_var), type(fruits), type(person), type(unique_numbers), type(nothing)
 
@@ -289,7 +362,11 @@ def type_examples():
 # CONTROL FLOW
 # =========================
 # if, elif, else
-def sign_of_number(x):
+def sign_of_number(x: float) -> str:
+	"""
+Return whether a number is positive, negative, or zero.
+Useful for data validation and feature engineering.
+	"""
 	if x > 0:
 		return "Positive"
 	elif x < 0:
@@ -298,14 +375,21 @@ def sign_of_number(x):
 		return "Zero"
 
 # for loop
-def sum_list(lst):
+def sum_list(lst: list[float]) -> float:
+	"""
+Return the sum of a list of numbers.
+	"""
 	total = 0
 	for item in lst:
 		total += item
 	return total
 
 # while loop
-def countdown(n):
+def countdown(n: int) -> list[int]:
+	"""
+Return a list counting down from n to 1.
+Useful for loops, timers, etc.
+	"""
 	result = []
 	while n > 0:
 		result.append(n)
@@ -313,7 +397,11 @@ def countdown(n):
 	return result
 
 # break and continue
-def first_even(nums):
+def first_even(nums: list[int]) -> int | None:
+	"""
+Return the first even number in a list, or None if not found.
+Useful for data filtering.
+	"""
 	for n in nums:
 		if n % 2 == 0:
 			return n
@@ -323,28 +411,44 @@ def first_even(nums):
 # FUNCTIONS
 # =========================
 # Function definition, arguments, return, docstrings
-def greet(name):
-	"""Return a greeting string."""
+def greet(name: str) -> str:
+	"""
+Return a greeting string for the given name.
+	"""
 	return f"Hello, {name}!"
 
-def add(a, b=0):
-	"""Return the sum of a and b (default 0)."""
+def add(a: float, b: float = 0) -> float:
+	"""
+Return the sum of a and b (default 0).
+	"""
 	return a + b
 
 # Arbitrary arguments
-def sum_all(*args):
+def sum_all(*args: float) -> float:
+	"""
+Return the sum of all arguments.
+Useful for variable-length input.
+	"""
 	return sum(args)
 
 # Keyword arguments
-def print_info(**kwargs):
+def print_info(**kwargs) -> str:
+	"""
+Return a string of key=value pairs from keyword arguments.
+Useful for logging and debugging.
+	"""
 	return ', '.join(f"{k}={v}" for k, v in kwargs.items())
 
 # Lambda (anonymous) functions
 square = lambda x: x * x
 
 # Nested functions
-def outer(x):
-	def inner(y):
+def outer(x: int) -> Callable[[int], int]:
+	"""
+Return a closure that adds x to its argument.
+Demonstrates nested functions and closures.
+	"""
+	def inner(y: int) -> int:
 		return x + y
 	return inner
 
@@ -421,5 +525,4 @@ if __name__ == "__main__":
 
 	print("\n--- Argparse ---")
 	print("Argparse example:", argparse_example())
-
 
