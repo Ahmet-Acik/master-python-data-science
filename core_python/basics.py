@@ -2,22 +2,68 @@
 basics.py
 ---------
 Comprehensive core Python: variables, data types, control flow, functions, comprehensions, lambda/functional tools, exception handling, file I/O, modules, decorators/generators, type annotations, context managers, regex, datetime, argparse. (OOP is in a separate file.)
+
+This module follows best practices, uses real-world and data science examples, and is designed for clarity and practical learning.
 """
-# =========================
-# VARIABLES
-# =========================
-# Variables are used to store data. Python is dynamically typed.
-int_var = 10
-float_var = 3.14
-str_var = "Hello, world!"
-bool_var = True
 
-# Multiple assignment
-a, b, c = 1, 2, 3
+# =========================
+# VARIABLES & ASSIGNMENT
+# =========================
+# Variables store data. Python is dynamically typed.
+age = 29  # int
+height_m = 1.75  # float
+name = "Ahmet"  # str
+is_student = False  # bool
 
-# Variable naming rules: start with a letter or _, no spaces, case-sensitive
-_private = 42
-CamelCase = 'allowed'
+# Multiple assignment (unpacking)
+latitude, longitude = 41.0082, 28.9784  # Istanbul coordinates
+
+# Swapping values
+x, y = 5, 10
+x, y = y, x
+
+# =========================
+# DATA TYPES & DATA STRUCTURES
+# =========================
+# Numbers
+price = 19.99
+quantity = 3
+total = price * quantity
+
+# Strings
+city = "Istanbul"
+greeting = f"Hello, {name} from {city}!"
+upper_city = city.upper()
+
+# Lists (ordered, mutable)
+temperatures = [22.1, 23.4, 21.8, 20.0]
+temperatures.append(19.5)
+avg_temp = sum(temperatures) / len(temperatures)
+
+# Tuples (ordered, immutable)
+rgb = (255, 0, 128)
+date = (2025, 8, 18)
+
+# Dictionaries (key-value, mutable)
+person = {"name": name, "age": age, "city": city}
+person["job"] = "Data Scientist"
+for key, value in person.items():
+	pass  # iterate over key-value pairs
+
+# Sets (unique, unordered)
+skills = {"python", "sql", "pandas", "python"}
+skills.add("numpy")
+
+# NoneType
+optional_value = None
+
+# Most-used built-in functions
+max_temp = max(temperatures)
+min_temp = min(temperatures)
+unique_skills = list(set(skills))
+rounded_price = round(price)
+enumerated = list(enumerate(temperatures))
+zipped = list(zip(temperatures, range(len(temperatures))))
 
 # =========================
 # DATA TYPES
